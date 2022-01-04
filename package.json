@@ -6,9 +6,23 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.24.0",
+    "body-parser": "^1.19.1",
+    "emailjs-com": "^3.2.0",
+    "express": "^4.17.2",
+    "express-handlebars": "^6.0.2",
+    "jquery": "^3.6.0",
+    "js-file-download": "^0.4.12",
+    "jspdf": "^2.5.0",
+    "mobx": "^6.3.10",
+    "node-polyfill-webpack-plugin": "^1.1.4",
+    "nodemailer": "^6.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
+    "stream": "^0.0.2",
+    "stream-browserify": "^3.0.0",
+    "typescript": "^4.5.4",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
@@ -34,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack": "^5.65.0"
   }
 }
