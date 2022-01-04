@@ -27,7 +27,14 @@
     <title>React App</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script
+        src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
+  <script>
+    (function(){
+        emailjs.init("<user_IL5fakIwm8zK6NFatXezQ>"); // Obtain your user ID at the dashboard https://dashboard.emailjs.com/integration
+    })();
+  </script>
+    <noscript>You need to enable JavaScript to run this app.</noscript> 
     <div id="root"></div>
     <!--
       This HTML file is a template.
