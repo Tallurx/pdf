@@ -105,7 +105,7 @@ function App() {
 
 
   return (
-    <MediaQuery minDeviceWidth={480}>
+    <MediaQuery minDeviceWidth={isMobileDevice}>
       <div id="content">
         {user.email !== "" ? (
           <AdobeForm Login={Login} error={error} />
