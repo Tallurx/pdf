@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AdobeForm from "./components/AdobeForm";
-import logo from "./Image/pingr.png";
+import logo from "./Image/error!.png";
 import emailjs from "emailjs-com";
 import jsPDF from "jspdf";
 
