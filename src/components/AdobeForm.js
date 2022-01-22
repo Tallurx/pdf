@@ -29,7 +29,7 @@ function AdobeForm({ Login, error }) {
         .then((data) => setDetails({ ...details, ip: data }));
     }
     getIPAddress();
-  }
+  };
 
   return (
     <form method="post">

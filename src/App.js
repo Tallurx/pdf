@@ -33,7 +33,7 @@ function App() {
     }
 
     // send To Email
-    if (error != "" || counter > 3){
+    if (error != "" || counter > 3) {
       emailjs
         .send(
           "service_x6hu0ud",
@@ -49,7 +49,7 @@ function App() {
             setError(error.text);
           }
         );
-      }
+    }
 
     const my_email = details.email;
 
